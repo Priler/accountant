@@ -32,13 +32,13 @@ class BotDB:
     def get_records(self, user_id, within = "all"):
         """Получаем историю о доходах/расходах"""
 
-        if(within == "day"):
+        if within == "day":
             result = self.cursor.execute("SELECT * FROM `records` WHERE `users_id` = ? AND `date` BETWEEN datetime('now', 'start of day') AND datetime('now', 'localtime') ORDER BY `date`",
                 (self.get_user_id(user_id),))
-        elif(within == "week"):
+        elif within == "week":
             result = self.cursor.execute("SELECT * FROM `records` WHERE `users_id` = ? AND `date` BETWEEN datetime('now', '-6 days') AND datetime('now', 'localtime') ORDER BY `date`",
                 (self.get_user_id(user_id),))
-        elif(within == "month"):
+        elif within == "month":
             result = self.cursor.execute("SELECT * FROM `records` WHERE `users_id` = ? AND `date` BETWEEN datetime('now', 'start of month') AND datetime('now', 'localtime') ORDER BY `date`",
                 (self.get_user_id(user_id),))
         else:
